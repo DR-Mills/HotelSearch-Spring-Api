@@ -2,7 +2,7 @@
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 
 <!DOCTYPE html>
 <html>
@@ -57,12 +57,13 @@
 			</h3>
 			<p>
 				Currently, the weather is
-				<c:out value="${ fn:toLowerCase(weatherResponse.currentObservation.weather) }" />
+				<c:out
+					value="${ fn:toLowerCase(weatherResponse.currentObservation.weather) }" />
 				with a temperature of
 				<c:out value="${ weatherResponse.currentObservation.temp }" />
 				and
 				<c:out value="${ weatherResponse.currentObservation.winds }" />
-				mph winds.
+				mph. winds.
 			</p>
 
 			<div class="row">
@@ -70,9 +71,11 @@
 				<c:forEach var="i" begin="0" end="5" step="1">
 					<div class="col-md-2" align="center">
 						<div>
-							<h6>
-								<c:out value="${ weatherResponse.time.startPeriodName.get(i) }" />
-							</h6>
+							<div>
+								<h6>
+									<c:out value="${ weatherResponse.time.startPeriodName.get(i) }" />
+								</h6>
+							</div>
 							<img src="${ weatherResponse.data.iconLink.get(i) }"
 								class="rounded">
 							<p>
@@ -82,7 +85,14 @@
 					</div>
 				</c:forEach>
 			</div>
-			last updated: ${ currentObservation.date }
+			last updated: ${ weatherResponse.currentObservation.date }
+
+		</div>
+
+		<div class="container giveMeSomeSpace">
+			<h3>Please, Visit Our Sponsor!</h3>
+			</br> <a href="https://grandcircusco.github.io/demo-apis"><img
+				src="img/gcDoughnutShop.PNG" style="width: 35%; height: 35%"></a>
 
 		</div>
 

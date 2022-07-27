@@ -24,17 +24,14 @@ public class HotelController {
 	@RequestMapping("/")
 	public String showHomepage(Model model, @RequestParam(required = false) String msg) {
 		
-		// experimenting with both full API and "partial" returns, using both in the jsp file.
-		CurrentObservation currentObservation = apiService.getCurrentObservation();
 		WeatherResponse weatherResponse = apiService.getWeatherResponse();
 		
 		// modify date string to show only date and time with no other format changes
-		String dateStr = currentObservation.getDate();
+		String dateStr = weatherResponse.getCurrentObservation().getDate();
 		String newDateStr = dateStr.substring(0, dateStr.length()-4);
-		currentObservation.setDate(newDateStr);
+		weatherResponse.getCurrentObservation().setDate(newDateStr);
 		
 		model.addAttribute("weatherResponse", weatherResponse);
-		model.addAttribute("currentObservation", currentObservation);
 		
 		return "homepage";
 	}

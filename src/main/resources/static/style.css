@@ -17,6 +17,10 @@
 	text-align: center;
 }
 
+.giveMeSomeSpace {
+	padding-top: 100px;
+}
+
 .main-search {
 	padding-bottom: 40px;
 }
