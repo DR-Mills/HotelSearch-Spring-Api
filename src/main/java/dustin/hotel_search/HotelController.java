@@ -1,6 +1,8 @@
 package dustin.hotel_search;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.Locale;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
@@ -16,20 +18,42 @@ public class HotelController {
 	@Autowired
 	private HotelRepository repo;
 	
+	@Autowired
+	private WeatherApiService apiService;
+	
 	@RequestMapping("/")
-	public String showHomepage(@RequestParam(required = false) String msg) {
+	public String showHomepage(Model model, @RequestParam(required = false) String msg) {
+		
+		// experimenting with both full API and "partial" returns, using both in the jsp file.
+		CurrentObservation currentObservation = apiService.getCurrentObservation();
+		WeatherResponse weatherResponse = apiService.getWeatherResponse();
+		
+		// modify date string to show only date and time with no other format changes
+		String dateStr = currentObservation.getDate();
+		String newDateStr = dateStr.substring(0, dateStr.length()-4);
+		currentObservation.setDate(newDateStr);
+		
+		model.addAttribute("weatherResponse", weatherResponse);
+		model.addAttribute("currentObservation", currentObservation);
+		
 		return "homepage";
 	}
 	
+	
 	@PostMapping("/resultsPage")
 	public String showResults(@RequestParam String city, @RequestParam int maxPerNight, Model model) {
+		
 		List<Hotel> resultsList = repo.findByCityAndPricePerNightLessThanEqual(city, Sort.by(Sort.Direction.ASC, "pricePerNight"), maxPerNight);
+		
 		if(resultsList.size() < 1) {
 			model.addAttribute("msg", "Sorry, there are no hotels in that price range. Please try a different city or a higher budget.");
 			return "homepage";
+		
 		}
+	
 		model.addAttribute("city", city);
 		model.addAttribute("hotels", resultsList);
+		
 		return "/resultsPage";
 	}
 }
