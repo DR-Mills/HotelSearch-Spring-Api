@@ -37,9 +37,10 @@
 				<c:forEach items="${hotels}" var="hotel">
 					<c:set var="num" value="${num + 1}" scope="page" />
 					<tr>
-						<th scope="row"><c:out value='${pageScope.num}'/></th>
+						<th scope="row"><c:out value='${pageScope.num}' /></th>
 						<td>${hotel.hotelName}</td>
-						<td><fmt:formatNumber value="${hotel.pricePerNight}" type="currency"/></td>
+						<td><fmt:formatNumber value="${hotel.pricePerNight}"
+								type="currency" /></td>
 					</tr>
 				</c:forEach>
 			</tbody>
@@ -49,8 +50,8 @@
 	</div>
 
 
-	<div class="homebutton">
-		<a href="/">Go Back to Home Page</a>
+	<div class="giveMeSomeSpace text-center">
+		<a class="btn btn-secondary" href="/">Back to Home Page</a><br>
 	</div>
 
 

@@ -4,16 +4,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class WeatherResponse {
 	
+	@JsonProperty("srsName")
 	private String srsName;
-
-	public String getSrsName() {
-		return srsName;
-	}
-
-	public void setSrsName(String srsName) {
-		this.srsName = srsName;
-	}
-	
 
 	@JsonProperty("location")
 	private Location location;
@@ -26,7 +18,15 @@ public class WeatherResponse {
 	
 	@JsonProperty("currentobservation")
 	private CurrentObservation currentObservation;
+	
+	public String getSrsName() {
+		return srsName;
+	}
 
+	public void setSrsName(String srsName) {
+		this.srsName = srsName;
+	}
+	
 	public Location getLocation() {
 		return location;
 	}

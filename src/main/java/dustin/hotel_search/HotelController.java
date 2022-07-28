@@ -1,9 +1,6 @@
 package dustin.hotel_search;
 
-import java.text.SimpleDateFormat;
 import java.util.List;
-import java.util.Locale;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
@@ -45,7 +42,6 @@ public class HotelController {
 		if(resultsList.size() < 1) {
 			model.addAttribute("msg", "Sorry, there are no hotels in that price range. Please try a different city or a higher budget.");
 			return "homepage";
-		
 		}
 	
 		model.addAttribute("city", city);
@@ -53,4 +49,5 @@ public class HotelController {
 		
 		return "/resultsPage";
 	}
+	
 }
